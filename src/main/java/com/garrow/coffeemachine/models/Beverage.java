@@ -8,5 +8,7 @@ public interface Beverage {
 
     String getName();
 
+    String getDescription();
+
     Recipe getRecipe();
 }

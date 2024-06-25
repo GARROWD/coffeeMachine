@@ -1,14 +1,38 @@
 package com.garrow.coffeemachine.models;
 
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public interface Beverage {
+@Data
+@Entity(name = "beverage")
+public class Beverage {
 
-    UUID getId();
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    private UUID id;
 
-    String getName();
+    @Column(name = "name")
+    private String name;
 
-    String getDescription();
+    @Column(name = "description")
+    private String description;
 
-    Recipe getRecipe();
+    @OneToMany(mappedBy = "beverage", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Action> actions;
+
+    public List<ActionIngredient> getActionsIngredients() {
+        List<ActionIngredient> actionIngredients = new ArrayList<>();
+
+        for (Action action : actions) {
+            actionIngredients.addAll(action.getActionIngredients());
+        }
+
+        return actionIngredients;
+    }
+
 }

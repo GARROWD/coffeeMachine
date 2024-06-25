@@ -6,6 +6,8 @@ import com.garrow.coffeemachine.services.interfaces.JpaService;
 import com.garrow.coffeemachine.utils.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,7 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 @Slf4j
 public class BeverageService implements JpaService<Beverage, UUID> {
+
     private final BeverageRepository beverageRepository;
 
     @Override
@@ -31,6 +34,10 @@ public class BeverageService implements JpaService<Beverage, UUID> {
         beverageRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
+    public Page<Beverage> findAll(Pageable pageable) {
+        return beverageRepository.findAll(pageable);
+    }
+
     @Override
     public Beverage create(Beverage entity) {
         beverageRepository.save(entity);
@@ -43,11 +50,12 @@ public class BeverageService implements JpaService<Beverage, UUID> {
     @Override
     public Beverage update(UUID id, Beverage entity) throws NotFoundException {
         existsById(id);
+        entity.setId(id);
         beverageRepository.save(entity);
 
         log.info("Beverage with ID {} is updated", id);
 
-        return null;
+        return entity;
     }
 
     @Override

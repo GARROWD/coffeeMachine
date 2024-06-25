@@ -5,7 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+@Transactional(readOnly = true)
 public interface JpaService<E, ID> {
+
     E findById(ID id) throws NotFoundException;
 
     void existsById(ID id) throws NotFoundException;

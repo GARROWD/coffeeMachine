@@ -15,13 +15,21 @@ public class ActionDto {
 
     private ProcedureType procedureType;
 
+    private Integer orderIndex;
+
     private List<ActionIngredientDto> actionIngredients;
+
+    private List<ActionArgumentDto> actionArguments;
+
 
     @Data
     public static class Create {
 
         @NotNull(message = "{validation.nullElement}")
         private ProcedureType procedureType;
+
+        @NotNull(message = "{validation.nullElement}")
+        private Integer orderIndex;
 
         @Valid
         @NotNull(message = "{validation.nullElement}")
@@ -31,6 +39,10 @@ public class ActionDto {
         @NotNull(message = "{validation.nullElement}")
         private List<ActionIngredientDto.Create> actionIngredients;
 
+        @Valid
+        @NotNull(message = "{validation.nullElement}")
+        private List<ActionArgumentDto.Create> actionArguments;
+
     }
 
     @Data
@@ -39,9 +51,18 @@ public class ActionDto {
         @NotNull(message = "{validation.nullElement}")
         private ProcedureType procedureType;
 
-        @Valid
+        @NotNull(message = "{validation.nullElement}")
+        private Integer orderIndex;
+
+        // TODO Это же не работает так, о чем я думал... Нужен id, но с ним может случиться следующая ситуация:
+        // Сущности с таким id нет и просто создастся новый, что очень непредсказуемое поведение
+        /*@Valid
         @NotNull(message = "{validation.nullElement}")
         private List<ActionIngredientDto.Update> actionIngredients;
+
+        @Valid
+        @NotNull(message = "{validation.nullElement}")
+        private List<ActionArgumentDto.Update> actionArguments;*/
 
     }
 }

@@ -45,9 +45,11 @@ public class BeverageDto {
         @NotBlank(message = "{validation.blankElement}")
         private String description;
 
-        @Valid
+        // TODO Это же не работает так, о чем я думал... Нужен id, но с ним может случиться следующая ситуация:
+        // Сущности с таким id нет и просто создастся новый, что очень непредсказуемое поведение
+        /*@Valid
         @NotNull(message = "{validation.nullElement}")
-        private List<ActionDto.Update> actions;
+        private List<ActionDto.Update> actions;*/
 
     }
 }

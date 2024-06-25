@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class BeverageOrderController {
+
     private final BeverageOrderService beverageOrderService;
     private final ModelMapper modelMapper;
 
@@ -31,10 +33,8 @@ public class BeverageOrderController {
     }
 
     @GetMapping("/statuses")
-    public Page<BeverageOrderStatus> findAllStatuses(
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "20") int size) {
-        return beverageOrderService.findAllStatuses(PageRequest.of(page, size));
+    public List<BeverageOrderStatus> findAllStatuses() {
+        return beverageOrderService.findAllStatuses();
     }
 
     @GetMapping("/{id}")

@@ -52,6 +52,12 @@ public class BeverageOrderService implements JpaService<BeverageOrder, UUID> {
         return foundEntity.orElseThrow(() -> new NotFoundException("Current")); // TODO
     }
 
+    public boolean hasNext() {
+        Optional<BeverageOrder> foundEntity = beverageOrderRepository.findFirstByStatusOrderByCreatedDesc(BeverageOrderStatus.PENDING);
+
+        return foundEntity.isPresent();
+    }
+
     public BeverageOrder findNext() {
         Optional<BeverageOrder> foundEntity = beverageOrderRepository.findFirstByStatusOrderByCreatedDesc(BeverageOrderStatus.PENDING);
 
@@ -63,13 +69,8 @@ public class BeverageOrderService implements JpaService<BeverageOrder, UUID> {
     }
 
     @Cacheable("beverageOrderStatuses")
-    public Page<BeverageOrderStatus> findAllStatuses(Pageable pageable) {
-        List<BeverageOrderStatus> statuses = Arrays.asList(BeverageOrderStatus.values());
-        int start = Math.min((int) pageable.getOffset(), statuses.size());
-        int end = Math.min((start + pageable.getPageSize()), statuses.size());
-
-        List<BeverageOrderStatus> pagedStatuses = statuses.subList(start, end);
-        return new PageImpl<>(pagedStatuses, pageable, statuses.size());
+    public List<BeverageOrderStatus> findAllStatuses() {
+        return Arrays.asList(BeverageOrderStatus.values());
     }
 
     @Override

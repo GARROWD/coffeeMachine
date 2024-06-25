@@ -35,7 +35,7 @@ public class ActionService implements JpaService<Action, UUID> {
     }
 
     public Page<Action> findAllByBeverage(UUID beverageId, Pageable pageable) {
-        return actionRepository.findAllByBeverageId(beverageId, pageable);
+        return actionRepository.findAllByBeverageIdOrderByOrderIndex(beverageId, pageable);
     }
 
     @Override

@@ -18,6 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class IngredientController {
+
     private final IngredientService ingredientService;
     private final ModelMapper modelMapper;
 

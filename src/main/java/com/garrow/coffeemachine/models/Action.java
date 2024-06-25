@@ -20,8 +20,14 @@ public class Action {
     @Enumerated(EnumType.STRING)
     private ProcedureType procedureType;
 
+    @Column(name = "order_index")
+    private Integer orderIndex;
+
     @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ActionIngredient> actionIngredients;
+
+    @OneToMany(mappedBy = "action", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ActionArgument> actionArguments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Beverage beverage;

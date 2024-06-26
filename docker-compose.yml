@@ -14,9 +14,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   app:
-    build:
-      dockerfile: ./Dockerfile
-      context: .
+    image: garrowd/coffeemachine-app:latest
     container_name: coffeemachine
     ports:
       - "8080:8080"

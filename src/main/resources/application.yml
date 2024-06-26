@@ -19,6 +19,7 @@ spring:
     password: ${DB_PASSWORD:postgres}
     url: jdbc:postgresql://${POSTGRESDB_URL:localhost:5432/postgres}
     driver-class-name: org.postgresql.Driver
+    enabled: false
 
 server:
   port: ${PORT:8080}

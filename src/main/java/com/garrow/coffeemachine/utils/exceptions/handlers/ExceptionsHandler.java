@@ -58,13 +58,12 @@ public class ExceptionsHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public List<GenericMessage> handleValidationExceptions(MethodArgumentNotValidException exception) {
         return exception.getBindingResult().getFieldErrors().stream().map(error ->
-                new GenericMessage(error.getDefaultMessage(), error.getField())
-        ).toList();
+                new GenericMessage(error.getDefaultMessage(), error.getField())).toList();
     }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public GenericMessageTimestamp customerNotFoundException(NotFoundException exception) {
+    public GenericMessageTimestamp notFoundException(NotFoundException exception) {
         return new GenericMessageTimestamp(exception.getMessage());
     }
 }

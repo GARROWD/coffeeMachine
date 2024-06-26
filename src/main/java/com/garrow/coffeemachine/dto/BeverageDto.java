@@ -1,5 +1,6 @@
 package com.garrow.coffeemachine.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
+@Schema(name = "BeverageDto")
 public class BeverageDto {
 
     private UUID id;
@@ -19,9 +21,8 @@ public class BeverageDto {
 
     private List<ActionDto> actions;
 
-    // Сюда прям напрашивается private List<ActionIngredientDto> actionsIngredients;, но это же дублирование информации
-
     @Data
+    @Schema(name = "BeverageDto.Create")
     public static class Create {
 
         @NotBlank(message = "{validation.blankElement}")
@@ -37,6 +38,7 @@ public class BeverageDto {
     }
 
     @Data
+    @Schema(name = "BeverageDto.Update")
     public static class Update {
 
         @NotBlank(message = "{validation.blankElement}")
@@ -45,11 +47,15 @@ public class BeverageDto {
         @NotBlank(message = "{validation.blankElement}")
         private String description;
 
-        // TODO Это же не работает так, о чем я думал... Нужен id, но с ним может случиться следующая ситуация:
-        // Сущности с таким id нет и просто создастся новый, что очень непредсказуемое поведение
-        /*@Valid
-        @NotNull(message = "{validation.nullElement}")
-        private List<ActionDto.Update> actions;*/
+        // Если вы хотите обновлять действия по их ID, можно использовать список с ID
+        // Однако это может требовать дополнительной логики в вашем сервисе обновления
+        // private List<UUID> actionIdsToUpdate;
+
+        // Или можно передавать полные данные ActionDto.Update для обновления каждого действия
+        // Но это может создать новые записи, если ID не существует
+        // @Valid
+        // @NotNull(message = "{validation.nullElement}")
+        // private List<ActionDto.Update> actions;
 
     }
 }

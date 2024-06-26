@@ -34,7 +34,7 @@ public class IngredientService implements JpaService<Ingredient, UUID> {
         log.info("Ingredient with ID {} has been increased by {} units", id, quantityToIncrease);
     }
 
-    public void decreaseQuantity(UUID id, float quantityToDecrease) throws NotFoundException, InsufficientQuantityException{
+    public void decreaseQuantity(UUID id, float quantityToDecrease) throws NotFoundException, InsufficientQuantityException {
         Ingredient ingredient = findById(id);
         float currentQuantity = ingredient.getCurrentQuantity();
 

@@ -1,10 +1,12 @@
 package com.garrow.coffeemachine.utils.exceptions.messages;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@Schema(name = "GenericMessageTimestamp")
 public class GenericMessageTimestamp {
 
     private String message;

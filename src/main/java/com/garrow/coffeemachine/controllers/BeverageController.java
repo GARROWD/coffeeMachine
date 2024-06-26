@@ -72,7 +72,7 @@ public class BeverageController {
     }
 
     @Operation(summary = "Get all actions for a beverage", description = "Returns a paginated list of all actions for a specific beverage")
-    @GetMapping("/beverage/{beverageId}")
+    @GetMapping("/{beverageId}/actions")
     public Page<ActionDto> findAllBeverageActions(
             @Parameter(description = "ID of the beverage for which actions are to be retrieved", required = true)
             @PathVariable(name = "beverageId") UUID beverageId,

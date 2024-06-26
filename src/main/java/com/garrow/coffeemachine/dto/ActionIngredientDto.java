@@ -1,5 +1,6 @@
 package com.garrow.coffeemachine.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -8,6 +9,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
+@Schema(name = "ActionIngredientDto")
 public class ActionIngredientDto {
 
     private UUID id;
@@ -17,6 +19,7 @@ public class ActionIngredientDto {
     private IngredientDto ingredient;
 
     @Data
+    @Schema(name = "ActionIngredientDto.Create")
     public static class Create {
 
         @NotNull(message = "{validation.nullElement}")
@@ -30,6 +33,7 @@ public class ActionIngredientDto {
     }
 
     @Data
+    @Schema(name = "ActionIngredientDto.Update")
     public static class Update {
 
         @NotNull(message = "{validation.nullElement}")

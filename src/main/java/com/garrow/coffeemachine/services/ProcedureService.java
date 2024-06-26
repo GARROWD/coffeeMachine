@@ -27,7 +27,7 @@ import java.util.List;
 @Slf4j
 public class ProcedureService {
 
-    // Самый важный класс который получился самым спорным и ненадежным
+    // TODO Самый важный класс который получился самым спорным и ненадежным
 
     private final BeverageOrderService beverageOrderService;
     private final IngredientService ingredientService;

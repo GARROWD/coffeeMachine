@@ -12,7 +12,8 @@ public class MixProcedure implements Procedure {
 
     @Override
     public void execute(List<ActionIngredient> actionIngredients, List<ActionArgument> actionArguments) {
-        log.warn("AAAAAAAAAAA");
+        // Какая-то реальная логика по процедуре, которая обращается к реальной кофемашине
+        log.info("MixProcedure started with actionIngredients: {} and actionArguments: {}", 1, 1);
     }
 
 }

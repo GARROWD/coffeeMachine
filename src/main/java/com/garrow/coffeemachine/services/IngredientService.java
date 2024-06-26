@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,23 +26,23 @@ public class IngredientService implements JpaService<Ingredient, UUID> {
 
     public void increaseQuantity(UUID id, float quantityToIncrease) throws NotFoundException {
         Ingredient ingredient = findById(id);
-        float currentQuantity = ingredient.getQuantity();
+        float currentQuantity = ingredient.getCurrentQuantity();
 
-        ingredient.setQuantity(currentQuantity + quantityToIncrease);
+        ingredient.setCurrentQuantity(currentQuantity + quantityToIncrease);
         ingredientRepository.save(ingredient);
 
         log.info("Ingredient with ID {} has been increased by {} units", id, quantityToIncrease);
     }
 
-    public void decreaseQuantity(UUID id, float quantityToDecrease) throws NotFoundException {
+    public void decreaseQuantity(UUID id, float quantityToDecrease) throws NotFoundException, InsufficientQuantityException{
         Ingredient ingredient = findById(id);
-        float currentQuantity = ingredient.getQuantity();
+        float currentQuantity = ingredient.getCurrentQuantity();
 
         if (currentQuantity < quantityToDecrease) {
             throw new InsufficientQuantityException(quantityToDecrease);
         }
 
-        ingredient.setQuantity(currentQuantity - quantityToDecrease);
+        ingredient.setCurrentQuantity(currentQuantity - quantityToDecrease);
         ingredientRepository.save(ingredient);
 
         log.info("Ingredient with ID {} has been decreased by {} units", id, quantityToDecrease);
@@ -49,13 +50,18 @@ public class IngredientService implements JpaService<Ingredient, UUID> {
 
     public void checkQuantity(UUID id, float quantityToDecrease) throws InsufficientQuantityException {
         Ingredient ingredient = findById(id);
-        float currentQuantity = ingredient.getQuantity();
+        float currentQuantity = ingredient.getCurrentQuantity();
 
         if (currentQuantity < quantityToDecrease) {
             throw new InsufficientQuantityException(quantityToDecrease);
         }
 
         ingredientRepository.save(ingredient);
+    }
+
+    public List<Ingredient> findAllWithLowQuantity() {
+        return ingredientRepository.findAll().stream()
+                .filter(ingredient -> ingredient.getCurrentQuantity() <= 0.1 * ingredient.getCapacity()).toList();
     }
 
     @Override

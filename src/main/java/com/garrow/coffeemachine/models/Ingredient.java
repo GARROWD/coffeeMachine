@@ -17,7 +17,10 @@ public class Ingredient {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "quantity")
-    private Float quantity;
+    @Column(name = "current_quantity")
+    private Float currentQuantity;
+
+    @Column(name = "capacity")
+    private Float capacity;
 
 }

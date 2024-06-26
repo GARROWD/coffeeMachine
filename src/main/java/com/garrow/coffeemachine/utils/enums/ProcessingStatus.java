@@ -4,4 +4,5 @@ public enum ProcessingStatus {
 
     IDLE,
     PROCESSING,
+    OUT_OF_STOCK
 }

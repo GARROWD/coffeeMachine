@@ -14,7 +14,9 @@ public class IngredientDto {
 
     private String name;
 
-    private Float quantity;
+    private Float currentQuantity;
+
+    private Float capacity;
 
     @Data
     public static class Create {
@@ -24,8 +26,11 @@ public class IngredientDto {
 
         @NotNull(message = "{validation.nullElement}")
         @Positive(message = "{validation.notPositiveElement}")
-        private Float quantity;
+        private Float currentQuantity;
 
+        @NotNull(message = "{validation.nullElement}")
+        @Positive(message = "{validation.notPositiveElement}")
+        private Float capacity;
     }
 
     @Data
@@ -36,7 +41,10 @@ public class IngredientDto {
 
         @NotNull(message = "{validation.nullElement}")
         @Positive(message = "{validation.notPositiveElement}")
-        private Float quantity;
+        private Float currentQuantity;
 
+        @NotNull(message = "{validation.nullElement}")
+        @Positive(message = "{validation.notPositiveElement}")
+        private Float capacity;
     }
 }

@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +39,7 @@ public class BeverageOrderService implements JpaService<BeverageOrder, UUID> {
         beverageOrderRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
+    @Transactional
     public void setStatus(UUID id, BeverageOrderStatus status) {
         BeverageOrder beverageOrder = findById(id);
         beverageOrder.setStatus(status);

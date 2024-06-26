@@ -9,8 +9,20 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    defer-datasource-initialization: true
-    show-sql: true
+    defer-datasource-initialization: false
+    show-sql: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
+  flyway:
+    user: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    url: jdbc:postgresql://${POSTGRESDB_URL:localhost:5432/postgres}
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: ${PORT:80}
+
+logging:
+  level:
+    root: info

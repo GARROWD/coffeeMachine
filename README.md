@@ -36,3 +36,4 @@
 - Flyway
 - Docker
 - Swagger
+- Maven
